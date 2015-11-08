@@ -1,6 +1,6 @@
 # testing ncdf with R
 setwd("~/tmp/ncdf-test")
-packages <- c("ncdf4", "dplyr", "ggplot2")
+packages <- c("ncdf4", "dplyr", "ggplot2", "reshape2", "RColorBrewer")
 lapply(packages, library, character.only = TRUE)
 sessionInfo()
 
