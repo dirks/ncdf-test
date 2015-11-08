@@ -10,13 +10,14 @@ con <- nc_open(dap_url)
 print(con)
 summary(con)
 
-t_an <- ncvar_get(con, "t_an")
-summary(t_an)
 lat <- ncvar_get(con, "lat")
 lon <- ncvar_get(con, "lon")
-
 depth <- ncvar_get(con, "depth")
 dim(depth)
+
+# get the whole temperature variable
+t_an <- ncvar_get(con, "t_an")
+summary(t_an)
 
 # plot distribution of temperature at several arbitrary depth
 depth_meters <- c(0, 5, 10, 20, 50, 100)
