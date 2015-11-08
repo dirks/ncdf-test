@@ -17,10 +17,13 @@ lon <- ncvar_get(con, "lon")
 depth <- ncvar_get(con, "depth")
 dim(depth)
 
-depth_i <- c(1, 2, 5, 10, 20, 50, 100)
-pdf(file = "output/temperature.pdf")
+# plot distribution of temperature at several arbitrary depth
+depth_meters <- c(0, 5, 10, 20, 50, 100)
+depth_i <- which(depth %in% depth_meters)
+
+pdf(file = "output/temperature.pdf", width = 7 * 1.6, height = 7)
 for(i in depth_i) {
- title <- paste0("Temperature at ", i)
+ title <- paste0("Annual Average Temperature at ", depth[i], " m")
  filled.contour(lon, lat, t_an[, , i], plot.title = title(title), 
   zlim = range(t_an, na.rm = TRUE), color.palette = heat.colors)
 }
