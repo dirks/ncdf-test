@@ -8,6 +8,7 @@ sessionInfo()
 dap_url <- "http://data.nodc.noaa.gov/thredds/dodsC/woa/WOA13/DATAv2/temperature/netcdf/decav/1.00/woa13_decav_t00_01v2.nc"
 con <- nc_open(dap_url)
 print(con)
+summary(con)
 
 t_an <- ncvar_get(con, "t_an")
 summary(t_an)
@@ -25,7 +26,9 @@ pdf(file = "output/temperature.pdf", width = 7 * 1.6, height = 7)
 for(i in depth_i) {
  title <- paste0("Annual Average Temperature at ", depth[i], " m")
  filled.contour(lon, lat, t_an[, , i], plot.title = title(title), 
-  zlim = range(t_an, na.rm = TRUE), color.palette = heat.colors)
+  zlim = range(t_an, na.rm = TRUE), nlevels = 10, col = rev(brewer.pal(10, "RdBu")))
 }
 dev.off()
 
+# size of objects in memory
+sapply(ls(), function(x) format(object.size(get(x)), units = "auto"))
